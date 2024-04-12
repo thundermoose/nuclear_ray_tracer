@@ -68,12 +68,12 @@ $(debug_objects_path)/%.o: $(source_path)/%.cu
 
 $(release_dependencies_path)/%.d: $(source_path)/%.cu
 	mkdir -p $(@D)
-	$(compiler) -o /dev/null -M -MF $@ -MT $(@:$(release_dependencies_path)/%.d=$(release_objects_path)/%.o) $<
+	$(compiler) -o /dev/null -M -MF $@ -MT $(@:$(release_dependencies_path)/%.d=$(release_objects_path)/%.o) $< $(compiler_flags)
 
 $(test_dependencies_path)/%.d: $(source_path)/%.cu
 	mkdir -p $(@D)
-	$(compiler) -o /dev/null -M -MF $@ -MT $(@:$(test_dependencies_path)/%.d=$(test_objects_path)/%.o) $<
+	$(compiler) -o /dev/null -M -MF $@ -MT $(@:$(test_dependencies_path)/%.d=$(test_objects_path)/%.o) $< $(compiler_flags)
 
 $(debug_dependencies_path)/%.d: $(source_path)/%.cu
 	mkdir -p $(@D)
-	$(compiler) -o /dev/null -M -MF $@ -MT $(@:$(debug_dependencies_path)/%.d=$(debug_objects_path)/%.o) $<
+	$(compiler) -o /dev/null -M -MF $@ -MT $(@:$(debug_dependencies_path)/%.d=$(debug_objects_path)/%.o) $< $(compiler_flags)
