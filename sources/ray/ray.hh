@@ -5,11 +5,12 @@
 
 namespace nucray {
 class ray {
+      public:
         vector start_position, direction;
 
-      public:
-        __host__ __device__ ray() = default;
-        __host__ __device__ ray(vector start_position, vector direction);
+        __host__ __device__ ray() {}
+        __host__ __device__ ray(vector start_position, vector direction) :
+                start_position(start_position), direction(direction) {}
 };
 } // namespace nucray
 

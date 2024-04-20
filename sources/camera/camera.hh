@@ -4,6 +4,7 @@
 #include <ray/ray.hh>
 #include <thrust/device_vector.h>
 #include <vector/vector.hh>
+#include <functional>
 
 namespace nucray {
 class camera {
@@ -16,9 +17,9 @@ class camera {
                size_t width, size_t height);
 
         thrust::device_vector<ray> get_rays();
-      private:
         __device__
-        ray operator ()(size_t ray_index);
+       ray operator ()(size_t &ray_index) const;
+      private:
 };
 } // namespace nucray
 
