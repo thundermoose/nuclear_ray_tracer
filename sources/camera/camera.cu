@@ -13,7 +13,7 @@ nucray::camera::camera(nucray::vector origin,
                        float focal_distance,
                        size_t width,
                        size_t height)
-    : origin(origin), forward(up.cros(side)), up(up), side(side),
+    : origin(origin), forward(side.cros(up)), up(up), side(side),
       focal_distance(focal_distance), width(width), height(height) {
 }
 
@@ -30,9 +30,9 @@ __device__ nucray::ray nucray::camera::operator()(size_t &ray_index) const {
         size_t column = ray_index % this->width;
         nucray::vector lower_left_corner = this->origin - this->side - this->up;
         nucray::vector pos = lower_left_corner +
-                             this->side * (2.0f * (float)column / this->width) +
-                             this->up * (2.0f * (float)row / this->height);
-        nucray::vector dir = (pos - (origin - forward * focal_distance));
+                             this->side * (2.0f * (float)column / (this->width-1)) +
+                             this->up * (2.0f * (float)row / (this->height-1));
+        nucray::vector dir = pos - (origin - forward * focal_distance);
         dir.normalize();
         return nucray::ray(pos, dir);
 }
