@@ -1,6 +1,7 @@
 #include <color_map/color_map.hh>
 #include <algorithm>
 #include <color_map/blue_to_red/blue_to_red.hh>
+#include <color_map/blue_green_yellow_red/blue_green_yellow_red.hh>
 #include <color_map/color_map_picker.hh>
 #include <memory>
 #include <sstream>
@@ -10,6 +11,8 @@ nucray::color_map_picker::color_map_picker(float minimum, float maximum)
     : minimum(minimum), maximum(maximum) {
         available_color_maps["blue-red"] =
             std::make_unique<nucray::blue_to_red_factory>(minimum, maximum);
+        available_color_maps["blue-green-yellow-red"] =
+            std::make_unique<blue_green_yellow_red_factory>(minimum, maximum);
 }
 
 std::vector<std::string>
