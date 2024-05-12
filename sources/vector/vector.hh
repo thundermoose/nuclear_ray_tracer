@@ -6,16 +6,20 @@ namespace nucray {
 class vector {
       public:
         float x, y, z;
-        __host__ __device__ vector() : x(0.0f), y(0.0f), z(0.0f) {}
+        __host__ __device__ vector() : x(0.0f), y(0.0f), z(0.0f) {
+        }
 
         __host__ __device__ vector(float x, float y, float z)
-            : x(x), y(y), z(z) {}
+            : x(x), y(y), z(z) {
+        }
 
         __host__ __device__ vector(const vector &other)
-            : x(other.x), y(other.y), z(other.z) {}
+            : x(other.x), y(other.y), z(other.z) {
+        }
 
         __host__ __device__ vector(vector &&other)
-            : x(other.x), y(other.y), z(other.z) {}
+            : x(other.x), y(other.y), z(other.z) {
+        }
 
         __host__ __device__ void operator=(const vector &origin) {
                 x = origin.x;
@@ -24,13 +28,13 @@ class vector {
         }
 
         __host__ __device__ vector operator+(const vector right_term) const {
-                return vector(x + right_term.x, y + right_term.y,
-                              z + right_term.z);
+                return vector(
+                    x + right_term.x, y + right_term.y, z + right_term.z);
         }
 
         __host__ __device__ vector operator-(const vector right_term) const {
-                return vector(x - right_term.x, y - right_term.y,
-                              z - right_term.z);
+                return vector(
+                    x - right_term.x, y - right_term.y, z - right_term.z);
         }
 
         __host__ __device__ float operator*(const vector right_term) const {
@@ -47,6 +51,26 @@ class vector {
                               x * right_term.y - y * right_term.x);
         }
 
+        __host__ __device__ float norm() const {
+                return sqrtf(x * x + y * y + z * z);
+        }
+
+        __host__ __device__ float norm_squared() const {
+                return x * x + y * y + z * z;
+        }
+
+        __host__ __device__ float theta() const {
+                return acosf(z/norm());
+        }
+
+        __host__ __device__ float phi() const {
+                float rho = sqrtf(x*x + y*y);
+                if (y > 0)
+                        return acosf(x/rho);
+                else
+                        return -acosf(x/rho);
+        }
+
         __host__ __device__ void normalize() {
                 auto distance = std::sqrt((*this) * (*this));
                 x /= distance;
@@ -60,7 +84,8 @@ class vector {
                        fabs(diff.z) < tollerance;
         }
 
-        __host__ __device__ ~vector() {}
+        __host__ __device__ ~vector() {
+        }
 };
 } // namespace nucray
 #endif
