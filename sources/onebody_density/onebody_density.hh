@@ -14,8 +14,8 @@ class onebody_density {
             : amplitude(amplitude), bra(bra), ket(ket) {
         }
         __device__ float operator()(vector position) const {
-                return amplitude * abs((conj(bra.wave_function(position)) *
-                       ket.wave_function(position)));
+                return amplitude * (bra.wave_function(position) *
+                       ket.wave_function(position)).real();
         }
 };
 } // namespace nucray

@@ -1,5 +1,3 @@
-#include "onebody_density/onebody_density.hh"
-#include <adfloat/adfloat.hh>
 #include <ray_integral/ray_integral.hh>
 #include <thrust/transform.h>
 

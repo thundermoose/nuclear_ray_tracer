@@ -1,4 +1,3 @@
-#include "color_map/color_map.hh"
 #include <color_map/blue_to_red/blue_to_red.hh>
 #include <memory>
 #include <thrust/transform.h>
