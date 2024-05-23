@@ -1,3 +1,4 @@
+#include "grid/grid.hh"
 #include <blixttest/test.hh>
 #include <camera/camera.hh>
 #include <iostream>
@@ -17,10 +18,10 @@ nucray::camera::camera(nucray::vector origin,
       focal_distance(focal_distance), width(width), height(height) {
 }
 
-thrust::device_vector<nucray::ray> nucray::camera::get_rays() {
+nucray::grid<nucray::ray> nucray::camera::get_rays() {
         thrust::device_vector<size_t> indices(this->width * this->height);
         thrust::sequence(indices.begin(), indices.end());
-        thrust::device_vector<ray> rays(this->width * this->height);
+        nucray::grid<ray> rays(this->width, this->height);
         thrust::transform(indices.begin(), indices.end(), rays.begin(), *this);
         return rays;
 }

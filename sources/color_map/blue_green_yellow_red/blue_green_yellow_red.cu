@@ -31,10 +31,10 @@ class blue_green_yellow_red_functor{
                 green_amount += yellow_amount;
 
                 nucray::color result = {.color_channals = {
-                                    .red = (uint8_t)(255*sqrtf(red_amount)),
-                                    .green = (uint8_t)(255*sqrtf(green_amount)),
-                                    .blue = (uint8_t)(255*sqrtf(blue_amount)),
-                                    .alpha = 0xff,
+                                    .red = red_amount,
+                                    .green = green_amount,
+                                    .blue = blue_amount,
+                                    .alpha = 1.0,
                                 }};
                 return result;
         }

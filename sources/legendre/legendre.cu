@@ -9,7 +9,7 @@ template <typename F> void test_specific(F &&exact_formula, int l, int m) {
         std::cout << "Testing: legendre(" << l << ", " << m << ")" << std::endl;
         for (size_t i = 0; i < num_points; i++) {
                 float x = 2.0 * i / (num_points - 1) - 1.0;
-                float result = legendre(l, m, x);
+                float result = nucray::legendre(l, m)(x);
                 float exact = exact_formula(x);
                 std::cout << "x = " << x << std::endl;
                 std::cout << "result = " << result << std::endl;

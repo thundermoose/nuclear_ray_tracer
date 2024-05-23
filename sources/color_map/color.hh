@@ -7,7 +7,7 @@ namespace nucray {
 union color {
         uint32_t color_code;
         struct {
-                uint8_t red, green, blue, alpha;
+                float red, green, blue, alpha;
         } color_channals;
 };
 } // namespace nucray

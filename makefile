@@ -3,7 +3,7 @@ compiler := g++ -std=c++17 -c
 linker := g++ -std=c++17
 
 nvidia_external_dependencies := cuda
-external_dependencies := $(nvidia_external_dependencies)
+external_dependencies := $(nvidia_external_dependencies) gtk4
 
 source_path := ./sources
 release_objects_path := .release_objects

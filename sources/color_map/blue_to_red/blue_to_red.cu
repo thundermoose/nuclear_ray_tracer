@@ -14,13 +14,13 @@ class blue_to_red_functor {
                     (value > minimum
                         ? (value < maximum ? value : maximum) - minimum
                         : 0.0f)/(maximum - minimum);
-                float blue_amount = 255*sqrtf(1.0f - intensity);
-                float red_amount = 255*sqrtf(intensity);
+                float blue_amount = 1.0f - intensity;
+                float red_amount = intensity;
                 nucray::color result = {.color_channals = {
-                                    .red = (uint8_t)(red_amount),
+                                    .red = red_amount,
                                     .green = 0,
-                                    .blue = (uint8_t)(blue_amount),
-                                    .alpha = 0xff,
+                                    .blue = blue_amount,
+                                    .alpha = 1.0,
                                 }};
                 return result;
         }

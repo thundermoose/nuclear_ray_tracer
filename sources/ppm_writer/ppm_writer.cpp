@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include <ppm_writer/ppm_writer.hh>
+#include <cmath>
 
 nucray::ppm_writer::ppm_writer() : width(0), height(0) {
 }
@@ -26,9 +27,9 @@ void nucray::ppm_writer::write(std::string filename) {
         char *data_to_write = new char[byte_size];
         size_t data_index = 0;
         for (auto &c : this->pixels) {
-                data_to_write[data_index++] = c.color_channals.red;
-                data_to_write[data_index++] = c.color_channals.green;
-                data_to_write[data_index++] = c.color_channals.blue;
+                data_to_write[data_index++] = (char)(255*sqrtf(c.color_channals.red));
+                data_to_write[data_index++] = (char)(255*sqrtf(c.color_channals.green));
+                data_to_write[data_index++] = (char)(255*sqrtf(c.color_channals.blue));
         }
         file.write(data_to_write,
                    byte_size);

@@ -37,19 +37,22 @@ int main() {
                             1.0f,
                             nucray::harmonic_state(2, l, m, 5.0f),
                             nucray::harmonic_state(2, l, m, 5.0f));
-                        nucray::ray_integral integral(100, 0.1, density);
+                        nucray::ray_integral integral(50, 0.2, density);
                         auto rays = camera.get_rays();
                         auto amplitudes = integral.integrate(rays);
 
                         nucray::color_map_picker pick_color(min(amplitudes),
                                                             max(amplitudes));
-                        auto color_map = pick_color.get_color_map("blue-green-yellow-red");
+                        auto color_map =
+                            pick_color.get_color_map("blue-green-yellow-red");
                         auto pixels = color_map->apply(amplitudes);
                         std::vector<nucray::color> host_pixels(pixels.size());
                         thrust::copy(
                             pixels.begin(), pixels.end(), host_pixels.begin());
                         nucray::ppm_writer ppm_writer;
-                        ppm_writer.set_pixels(width, height, host_pixels);
+                        ppm_writer.set_pixels(rays.get_num_rows(),
+                                              rays.get_num_columns(),
+                                              host_pixels);
                         std::stringstream strs;
                         strs << "images/harmonic_l=" << l << "_m=" << m
                              << "_image.ppm";
