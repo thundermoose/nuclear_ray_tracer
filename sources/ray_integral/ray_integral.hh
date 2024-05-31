@@ -12,7 +12,7 @@ class ray_integral {
         onebody_density density;
       public:
         __host__ ray_integral(int num_steps, float step_length, onebody_density density);
-        thrust::device_vector<float>
+        virtual thrust::device_vector<float>
             integrate(thrust::device_vector<ray> &rays);
         __device__ float operator() (ray &r) const;
                 
